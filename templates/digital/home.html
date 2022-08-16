@@ -1,0 +1,693 @@
+{% extends "./base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<link rel="stylesheet" href="{% static 'assets/css/pricing.css' %}" />
+
+{% endblock style %}
+
+{% block js %}
+
+<script src="https://www.paypal.com/sdk/js?client-id={{env.client_id}}&currency=USD"></script>
+
+<script src="{% static 'assets/js/paypal.js' %}"></script>
+
+<script>
+  let webView = document.querySelector(".webview")
+  let allWebView = document.querySelector(".allview")
+
+  let allView = document.querySelectorAll(".filter-web")
+  
+  
+
+  function displayWeb(){
+    for(let i =0;i < allView.length;i++){
+      allView[i].style.display = "block";
+    }
+    return
+  }
+
+  function allWeb(){
+   
+    for(let i = 0;i < allView.length/2;i++){
+      allView[i].style.display = "none";
+    }
+    return
+  }
+
+webView.addEventListener("click", displayWeb);
+allWebView.addEventListener("click", allWeb);
+window.addEventListener("load", allWeb);
+
+</script>
+
+<script>
+  let customPrice = document.getElementById("ccp");
+  function customisedPackage(){
+    let initialAmount = 0;
+    let select = customPrice.querySelectorAll('#check-option .form-check-input');
+    
+    for(let i =0; i < select.length; i++){
+
+    if (select[i].checked){
+      initialAmount += parseInt(select[i].value);
+    }}
+
+    customPrice.querySelector("#custom-price").innerHTML = initialAmount;
+
+  }
+  customPrice.addEventListener("click",customisedPackage)
+</script>
+{% endblock js %}
+
+{% block content %}
+<!-- ======= Hero Section ======= -->
+<section id="hero" style="background:url('{% static 'assets/img/hero-bg.jpg' %}')" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-6 col-lg-8">
+          <h2 style="font-weight:bolder;font-size:2em;">Compelling and Affordable Digital Solutions With T4c-Digital<span>.</span> We offer our services to all types businesses</h2>
+        </div>
+      </div>
+
+      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-hand-heart-line"></i>
+            <h3><a href="">Trusted By Organisation Around The World</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-money-euro-box-line"></i>
+            <h3><a href="">No hidden Fees</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-money-dollar-box-line"></i>
+            <h3><a href="">Best Value For Money</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-speed-line"></i>
+            <h3><a href="">Fast And Reliable</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <i class="ri-service-line"></i>
+            <h3><a href="">At Your Service 24/7</a></h3>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            <img src="{% static 'assets/img/about.jpg' %}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
+            <h3>We are a team of talented digital product creators</h3>
+            <p class="fst-italic">
+            Let us help you deliver your business to your clients satisfaction via our compelling digital solutions. Your business is constantly our priority.
+            </p>
+            <ul>
+  
+              <li><i class="ri-check-double-line"></i>Our digital solutions present a compelling way to interpret your services and products to potential customers. Allows them to save time and acquire essential information about your company.</li>
+              <li><i class="ri-check-double-line"></i> We can help you reach a wider audience and amass more clients since the global online presence and traffic constitutes over 70% of all consumer activities.</li>
+              <li><i class="ri-check-double-line"></i> Your firm can stand out among others in the digital world. All you need is to present your unique offering engagingly online.</li>
+            </ul>
+            <p>
+              Our digital solutions will help you propel customer engagement and increase their loyalty due to the engaging and compelling disposition of your online presence.            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="clients-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="{% static 'assets/img/clients/goldenland.jpg' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'assets/img/clients/client-2.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'assets/img/clients/client-3.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'assets/img/clients/client-4.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'assets/img/clients/client-5.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'assets/img/clients/client-6.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'assets/img/clients/client-7.png' %}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'assets/img/clients/client-8.png' %}" class="img-fluid" alt=""></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+
+
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>Check out our Services</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box" style="width:100%;">
+              <div class="icon"><i class="bx bxl-chrome"></i></div>
+              <h4><a href="">Web Design & Redesign</a></h4>
+              <p></p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box" style="width:100%;">
+              <div class="icon"><i class="bx bxl-css3"></i></div>
+              <h4><a href="">Frontend And Backend Development</a></h4>
+              <p></p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box" style="width:100%;">
+              <div class="icon"><i class="bx bxl-blogger"></i></div>
+              <h4><a href="">Graphic Design</a></h4>
+              <p></p>
+            </div>
+          </div>
+
+          <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-slideshow"></i></div>
+              <h4><a href="">Training or Onboarding Videos</a></h4>
+              <p></p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-slideshow"></i></div>
+              <h4><a href="">Internal Company Videos</a></h4>
+              <p></p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-slideshow"></i></div>
+              <h4><a href="">Videos For Crowdfunding</a></h4>
+              <p></p>
+            </div>
+          </div> -->
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Cta Section ======= -->
+    <section style="background:linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.5)),url('{% static 'assets/img/cta-bg.jpg' %}')fixed center center;"  id="cta" class="cta">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="text-center">
+          <h3>Call To Action</h3>
+          <p>Am sure you want us to give you the best presence out there. Let's get started with just a click down here.</p>
+          <a class="cta-btn" href="#package">Call To Action</a>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Portfolio</h2>
+          <p>Check out our Portfolio</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active allview">All</li>
+              <!-- <li data-filter=".filter-card">Web Designs</li> -->
+              <li data-filter=".filter-card">Logos</li>
+              <li data-filter=".filter-web" class="webview">Web</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+
+
+<!-- Beginning Logo -->
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{% static 'assets/img/portfolio/logoflyer1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <!-- <h4>Card 2</h4>
+                <p>Card</p>
+                <div class="portfolio-links">
+                  <a href="{% static 'assets/img/portfolio/portfolio-4.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
+                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{% static 'assets/img/portfolio/logoflyer2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <!-- <h4>Card 3</h4>
+                <p>Card</p>
+                <div class="portfolio-links">
+                  <a href="{% static 'assets/img/portfolio/portfolio-8.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
+                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{% static 'assets/img/portfolio/logoflyer3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <!-- <h4>Card 1</h4>
+                <p>Card</p>
+                <div class="portfolio-links">
+                  <a href="{% static 'assets/img/portfolio/portfolio-7.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
+                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{% static 'assets/img/portfolio/logoflyer4.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <!-- <h4>App 1</h4>
+                <p>App</p>
+                <div class="portfolio-links">
+                  <a href="{% static 'assets/img/portfolio/portfolio-1.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
+                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{% static 'assets/img/portfolio/logoflyer5.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <!-- <h4>App 2</h4>
+                <p>App</p>
+                <div class="portfolio-links">
+                  <a href="{% static 'assets/img/portfolio/portfolio-3.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
+                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{% static 'assets/img/portfolio/logoflyer6.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <!-- <h4>App 3</h4>
+                <p>App</p>
+                <div class="portfolio-links">
+                  <a href="{% static 'assets/img/portfolio/portfolio-6.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
+                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+<!-- End of Logos -->
+
+
+<!-- Beginning Website -->
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="{% static 'assets/img/portfolio/web1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Goldenland</h4>
+                <p>Estate management agency</p>
+                <div class="portfolio-links">
+                  <a href="{% static 'assets/img/portfolio/web1.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
+                  <a href="https://goldenlandng.com" title="More Details"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="{% static 'assets/img/portfolio/web2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Spinkfolio</h4>
+                <p>A portfolio design</p>
+                <div class="portfolio-links">
+                  <a href="{% static 'assets/img/portfolio/web2.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
+                  <a href="https://spinkfolio.netlify.app" title="More Details"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="{% static 'assets/img/portfolio/web3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Joda Solutions</h4>
+                <p>Web design for business trainings</p>
+                <div class="portfolio-links">
+                  <a href="{% static 'assets/img/portfolio/web3.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
+                  <a href="https://joda-solutions.netlify.app" title="More Details"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Website -->
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row no-gutters">
+          <div style="background:url('{% static 'assets/img/counts-img.jpg' %}')" class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start" data-aos="fade-right" data-aos-delay="100"></div>
+          <div class="col-xl-7 ps-0 ps-lg-5 pe-lg-1 d-flex align-items-stretch" data-aos="fade-left" data-aos-delay="100">
+            <div class="content d-flex flex-column justify-content-center">
+              <h3>Accomplishments So Far</h3>
+              <p>
+                Here are the statistics of our accomplishments putting smile on our clients faces.
+              </p>
+              <div class="row">
+                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                  <div class="count-box">
+                    <i class="bi bi-emoji-smile"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="2" class="purecounter"></span>
+                    <p><strong>Happy Clients</strong></p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                  <div class="count-box">
+                    <i class="bi bi-journal-richtext"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="2" class="purecounter"></span>
+                    <p><strong>Projects</strong></p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                  <div class="count-box">
+                    <i class="bi bi-clock"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="4" class="purecounter"></span>
+                    <p><strong>Years of experience</strong> </p>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End .content-->
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Counts Section -->
+
+
+
+    <!-- ======= package Section ======= -->
+    <section id="package" class="package pricing py-5">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Affordable Pricing</h2>
+          <p>Choose A Package That Suits You</p>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <!-- Free Tier -->            
+            {% for price in pricing %}
+            <div class="col-lg-4">
+              <div class="card mb-5 mb-lg-0">
+                <div class="card-body">
+                  <h5 class="card-title text-muted text-uppercase text-center" id="pay-description">Basic Plan</h5>
+                  <h6 id="custom-price" class="card-price text-center">${{price.first_package}}<span class="period">/month (varies with complexity)</span></h6>
+                  <hr>
+                  <ul class="fa-ul">
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>web design</li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>website redesign</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>2 logo variants</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span></li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>​​2 X Revisions</li>
+                    <li ><span class="fa-li"><i class="fas fa-check"></i></span>1 week support</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>1 graphic design of choice
+                    </li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>frontend development</li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>backend development</li>
+                  </ul>
+                  <div class="d-grid">
+                    <!-- <a href="#" class="btn btn-primary text-uppercase">Button</a> -->
+                    <div id="paypal-button-container"></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Plus Tier -->
+            <div class="col-lg-4">
+              <div class="card mb-5 mb-lg-0">
+                <div class="card-body">
+                  <h5 class="card-title text-muted text-uppercase text-center" id="pay-description">Pro Plan</h5>
+                  <h6 id="custom-price" class="card-price text-center">${{price.second_package}}<span class="period">/month (varies with complexity)</span></h6>
+                  <hr>
+                  <ul class="fa-ul">
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>web design</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>website redesign</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>4 logo variants</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span></li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>​​3 X Revisions</li>
+                    <li ><span class="fa-li"><i class="fas fa-check"></i></span>2 weeks support</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>1 graphic design of choice
+                    </li>
+                    <li ><span class="fa-li"><i class="fas fa-times"></i></span>frontend development</li>
+                    <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>backend development</li>
+                  </ul>
+                  <div class="d-grid">
+                    <!-- <a href="#" class="btn btn-primary text-uppercase">Button</a> -->
+                    <div id="paypal-button-container"></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Pro Tier -->
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-muted text-uppercase text-center" id="pay-description">Premium Plan</h5>
+                  <h6 id="custom-price" class="card-price text-center">${{price.third_package}}<span class="period">/month (varies with complexity)</span></h6>
+                  <hr>
+                  <ul class="fa-ul">
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>web design</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>website redesign</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>6 logo variants</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span></li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>​​4 X Revisions</li>
+                    <li ><span class="fa-li"><i class="fas fa-check"></i></span>4 weeks support</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>2 graphic designs of choice
+                    </li>
+                    <li ><span class="fa-li"><i class="fas fa-check"></i></span>frontend development</li>
+                    <li><span class="fa-li"><i class="fas fa-check"></i></span>backend development</li>
+                  </ul>
+                  <div class="d-grid">
+                    <!-- <a href="#" class="btn btn-primary text-uppercase">Button</a> -->
+                    <div id="paypal-button-container"></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+<style>
+
+.check-option {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.custom-price-grid{
+  display: flex;
+  margin-top: 5%;
+  justify-content: center;
+}
+</style>
+
+<!-- Start Customised Package -->
+<h1 class="text-center" style="margin-top:5%;font-weight:bold;">OR</h1>
+{% with customer.0 as cp %}
+
+<div class="container">
+  <div class="row">
+    <!-- Free Tier -->            
+    <div class="col-lg-12" style="margin-top:5%;">
+      <div class="card mb-5 mb-lg-0">
+        <div class="card-body" id="ccp">
+          <h5 class="card-title text-muted text-uppercase text-center">Customise Your Package</h5>
+          <h6 class="custom-price text-center">$<span style="font-size:3rem;" id="custom-price">0</span><span class="period"><br>(varies with complexity)</span></h6>
+          <hr>
+
+<!-- START CHECKBOX OPTION -->
+<div class="check-option" id="check-option">
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="{{cp.logo_flyer}}" id="flexCheckDefault" />
+  <label class="form-check-label" for="flexCheckDefault"><strong id="pay-description">Logos/Flyer</strong> ($<span id="price">{{cp.logo_flyer}}</span>/order)</label>
+</div>
+
+<!-- Checked checkbox -->
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="{{cp.frontend}}" id="flexCheckChecked"/>
+  <label class="form-check-label" for="flexCheckChecked" ><strong id="pay-description">Frontend Development</strong> ($<span id="price">{{cp.frontend}}</span>/hour)</label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="{{cp.backend}}" id="flexCheckDefault" />
+  <label class="form-check-label" for="flexCheckDefault"><strong id="pay-description">Backend Development</strong> ($<span id="price">{{cp.backend}}</span>/hour)</label>
+</div>
+
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="{{cp.devops}}" id="flexCheckDefault" />
+  <label class="form-check-label" for="flexCheckDefault"><strong id="pay-description">Devops</strong> ($<span id="price">{{cp.devops}}</span>/hour)</label>
+</div>
+</div>
+
+<!-- END CHECKBOX OPTION -->
+
+          <div class="d-grid custom-price-grid">
+            <!-- <a href="#" class="btn btn-primary text-uppercase">Button</a> -->
+            <div id="paypal-button-container"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+{%endwith%}
+<!-- Start Customised Package -->
+
+      </div>
+    </section><!-- End package Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Contact Us</p>
+        </div>
+
+
+        <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>Rua Escultor Barata Feyo</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>info@t4cdigital.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+351 912171586</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form action="{% url 'digital:contactus' %}" method="POST" class="php-email-form">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Message" required></textarea>
+              </div>
+
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+
+  {% endblock content %}
+

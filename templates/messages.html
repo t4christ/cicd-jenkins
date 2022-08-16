@@ -1,0 +1,146 @@
+{% load static %} 
+<script src="{% static 'assets/js/message.js' %}" defer></script>
+<div id="message-inform" >
+  <div  id = "success-wrapper" style="display:none;" >
+    <p class="success-paypal">Awesome. Your payment was successful.</p>
+  </div>
+  <div  id = "error-wrapper" style="display:none;">
+    <p class="fail-paypal" >Error! Could not process payment. Kindly try again. Thanks</p>
+  </div>
+
+  <div id = "cancel-wrapper"  style="display:none;">
+    <p class="fail-paypal" >Ooh!You canceled your payment. Contact us for further help.</p>
+  </div>
+</div>
+
+  <div id="message-info" >
+    {% for message in messages %}
+    {% if 'success' in message.tags %}
+    <div class = "success-wrapper">
+    <p class="success-text">{{ message|striptags }}</p>
+    </div>
+    {% elif 'error' in message.tags %}
+    <div class = "error-wrapper">
+    <p class="fail-text">Error! {{ message|striptags }}</p>
+  </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+
+
+
+
+<style>
+
+@keyframes messages {
+  from {left:-100%;}
+  to {width: 100%;}
+}
+
+@keyframes errorText {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+.errorText {
+  animation-name: errorText;
+  animation-duration: 2s;
+  animation-direction: alternate;
+}
+
+#message-info{
+  position:fixed;
+  width:400px;
+  top:0;
+  left: 100%;
+  transform: translate(-100%, 0);
+  animation-name: messages;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  z-index: 5000;
+}
+
+#message-inform {
+  position:fixed;
+  width:400px;
+  top:0;
+  left: 100%;
+  transform: translate(-100%, 0);
+  animation-name: messages;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  z-index: 5000;
+}
+
+/* #message-info{
+  position: fixed;
+  top:0px;
+  right:0px;
+  z-index: 5000;
+} */
+
+#message-info p,#message-inform p {
+  text-align: center;
+  margin:5px;
+}
+
+.errorlist{
+  animation-name: errorText;
+  animation-duration: 2s;
+  animation-direction: alternate;
+}
+
+    #success-wrapper,.success-wrapper {
+      float:right;
+      width:400px;
+      background:green;
+      display: flex;
+      text-align: center;
+      height: 60px;
+      align-items: center;
+      margin-top:82px;
+    }
+
+    .hideClass  {
+      display:none;
+    }
+
+    .displayClass{
+      display:flex;
+    }
+
+    #success-wrapper,#cancel-wrapper,#error-wrapper{
+      display:none;
+      color:white
+    }
+
+    .success-wrapper,.cancel-wrapper,.error-wrapper p{
+      color:white
+    }
+    #error-wrapper,#cancel-wrapper,.error-wrapper,.cancel-wrapper{
+      
+      float:right;
+      width:400px;
+      background:darkred;
+      display: flex;
+      text-align: center;
+      height: 60px;
+      align-items: center;
+      margin-top:82px;
+    }
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
