@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    shm_size: 500M
+    cpus: 0.7
+    secrets:
+         - t4c_secret
+    volumes:
+      - db_data:/app
+    ports:
+      - "80:8000"
+    networks:
+       - web_redis
+
+  celery_worker:
+     build: .
+     command: celery -A t4c worker --loglevel=info
+     secrets:
+       - t4c_secret
+     networks:
+       - web_redis
+
+
+
+  redis_digital:
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - web_redis
+
+volumes:
+  db_data:
+
+networks:
+  web_redis:
+
+secrets:
+  t4c_secret:
+    file: ./.env

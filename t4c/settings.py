@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     # 'whitenoise.runserver_nostatic',  # new
-    'cloudinary_storage',
+#    'cloudinary_storage',
     'django.contrib.staticfiles',
     # 'storages',
-    'cloudinary',
+#    'cloudinary',
     #Apps
     'digital',
     #Third Party
@@ -62,14 +62,15 @@ DEFAULT_FROM_EMAIL = "T4cDigital <info@t4cdigital.com>"
 # WHITENOISE_MANIFEST_STRICT = False
 
 #Celery
-CELERY_BROKER_URL = os.getenv("REDIS_URL") 
-CELERY_RESULT_BACKEND =  os.getenv("REDIS_URL") 
+REDIS_URL = os.getenv("REDIS_URL") 
+CELERY_BROKER_URL = f'redis://{REDIS_URL}:6379'
+CELERY_RESULT_BACKEND = f'redis://{REDIS_URL}:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 
-CLOUDINARY_URL = os.getenv("CLOUDINARY_URL_ALT")
+#CLOUDINARY_URL = os.getenv("CLOUDINARY_URL_ALT")
 # CLOUDI_NAME = os.getenv('CLOUDINARY_NAME')
 # CLOUDI_API_KEY = os.getenv('CLOUDINARY_API_KEY')
 # CLOUDI_API_SECRET = os.getenv('CLOUDINARY_SECRET_KEY')
@@ -121,7 +122,7 @@ WSGI_APPLICATION = 't4c.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-if DEBUG:
+if not DEBUG:
     DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -179,7 +180,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 
-if  DEBUG:
+if DEBUG:
 # django_project/settings.py
     # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
     STATIC_URL = "/static/"
@@ -192,49 +193,34 @@ if  DEBUG:
     MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 else:
-    # AWS_LOCATION = 'static'
-    # AWS_ACCESS_KEY_ID =os.getenv('AWS_CLIENT_KEY')
-    # AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_KEY')
-    # AWS_STORAGE_BUCKET_NAME = os.getenv('BUCKET_NAME')
-    # AWS_S3_CUSTOM_DOMAIN='%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-    # AWS_S3_OBJECT_PARAMETERS = {    
-    #     'CacheControl': 'max-age=86400',
-    # }
-    # DEFAULT_FILE_STORAGE = 't4c.storage_backends.MediaStorage'
-    # STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-    STATIC_URL = '/digital_cdn/'
-    STATIC_ROOT = 'digital_cdn'
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'digit_cdn')
-    ] 
+       	DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+       	STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+        AWS_S3_ACCESS_KEY_ID = os.getenv('ACCESS_KEY')
+        AWS_S3_SECRET_ACCESS_KEY = os.getenv('SECRET_KEY')
+        AWS_STORAGE_BUCKET_NAME = os.getenv('BUCKET_NAME')
+        STATIC_ENDPOINT = os.getenv('STATIC_ENDPOINT')
+        ACCOUNT_ID=os.getenv('ACCOUNT_ID')
+       	AWS_S3_ENDPOINT_URL = "https://bucket.t4cdigital.com" #f'https://{ACCOUNT_ID}.r2.cloudflarestorage.com/t4cdigital'
+        AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+       	STATIC_URL = f'{STATIC_ENDPOINT}/t4cdigital/'
+        MEDIA_URL = '/media/'
+       	MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+        STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-    CLOUDINARY_STORAGE = {
-    # other settings, like credentials
-    'MEDIA_TAG': 'media',
-    'STATIC_TAG': 'digital_cdn',
-    'MAGIC_FILE_PATH': 'magic',
-    'PREFIX': '/media/',
-    'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'manifest')
-}
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
-}
+#LOGGING = {
+#    'version': 1,
+#    'disable_existing_loggers': False,
+#    'handlers': {
+#        'console': {
+#            'class': 'logging.StreamHandler',
+#        },
+#    },
+#    'loggers': {
+#        'django': {
+#            'handlers': ['console'],
+#             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+#        },
+#    },
+#}
 
 

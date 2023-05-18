@@ -1,5 +1,5 @@
 from django.db import models
-from cloudinary_storage.storage import RawMediaCloudinaryStorage
+#from cloudinary_storage.storage import RawMediaCloudinaryStorage
 
 # Create your models here.
 class Pricing(models.Model):
@@ -44,7 +44,7 @@ class customPrice(models.Model):
 
 class emailFile(models.Model):
     filename = models.CharField(max_length=100,default='')
-    file = models.FileField(upload_to='emailfile/',blank=True,max_length=1000,storage=RawMediaCloudinaryStorage())
+    file = models.FileField(upload_to='emailfile/',blank=True,max_length=1000)
 
     def __str__(self):
         return "Email campaign {}".format(self.filename)
